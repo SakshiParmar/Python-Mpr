@@ -42,7 +42,7 @@ def lucy_speak(audio_string):
     audio_file = 'audio' + str(r) + '.mp3'
     tts.save(audio_file) # save as mp3
     playsound.playsound(audio_file) # play the audio file
-    print(f"Lucy: {audio_string}") # print what app said
+    print(f"Lucy: {audio_string}") # print what assistant said
     os.remove(audio_file) # remove audio file
 
 
@@ -68,6 +68,12 @@ def respond(voice_data):
     # 4: greeting
     if there_exists(["how are you","how are you doing"]):
         lucy_speak(f"I'm very well, thanks for asking {user_obj.name}.")
+
+    # 5: quotes
+    if there_exists(["quote of the day"]):
+        quotes = [f"Work until you no longer have to introduce yourself.", f"You’re braver than you believe, and stronger than you seem, and smarter than you think.", f"Don't stop until you are proud."]
+        quote = quotes[random.randint(0,len(quotes)-1)]
+        lucy_speak(quote)
 
     # 5: time
     if there_exists(["what's the time","tell me the time","what time is it","i need the time"]):
@@ -99,19 +105,22 @@ def respond(voice_data):
         os.system('notepad')
         lucy_speak('Done for you!')
 
+    # 9: google
     if there_exists(["open google"]):
             webbrowser.open("google.com")
             lucy_speak("Here is google for you!")
 
+    # 10: youtube
     if there_exists(["open youtube"]):
             webbrowser.open("www.youtube.com")
             lucy_speak("Here is youtube for you!")
 
+    # 11: github
     if there_exists(["open github"]):
             webbrowser.open("https://www.github.com")
             lucy_speak("Here is github for you!")
     
-    # 9: exiting
+    # 12: exiting
     if there_exists(["thank you","exit"]):
         lucy_speak('Goodbye')
         exit()
