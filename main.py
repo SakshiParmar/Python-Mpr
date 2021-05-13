@@ -49,7 +49,7 @@ def lucy_speak(audio_string):
 def respond(voice_data):
     # 1: greetings
     if there_exists(['hey','hi','hello']):
-        greetings = [f"Hey, how can I help you {user_obj.name}", f"Hey, what's up? {user_obj.name}", f"I'm listening {user_obj.name}", f"How can I help you? {user_obj.name}", f"Hello {user_obj.name}"]
+        greetings = [f"Hey, how can I help you?", f"Hey, what's up?", f"I'm listening.", f"How can I help you?"]
         greet = greetings[random.randint(0,len(greetings)-1)]
         lucy_speak(greet)
 
@@ -69,12 +69,6 @@ def respond(voice_data):
     if there_exists(["how are you","how are you doing"]):
         lucy_speak(f"I'm very well, thanks for asking {user_obj.name}.")
 
-    # 5: quotes
-    if there_exists(["quote of the day"]):
-        quotes = [f"Work until you no longer have to introduce yourself.", f"You’re braver than you believe, and stronger than you seem, and smarter than you think.", f"Don't stop until you are proud."]
-        quote = quotes[random.randint(0,len(quotes)-1)]
-        lucy_speak(quote)
-
     # 5: time
     if there_exists(["what's the time","tell me the time","what time is it","i need the time"]):
         time = ctime().split(" ")[3].split(":")[0:2]
@@ -87,7 +81,7 @@ def respond(voice_data):
         lucy_speak(time)
     
     # 6: search
-    if there_exists(["search"]):
+    if there_exists(["find"]):
         search = record_audio('What do you want to search for?')
         url = 'https://google.com/search?q=' + search
         webbrowser.get().open(url)
@@ -105,29 +99,24 @@ def respond(voice_data):
         os.system('notepad')
         lucy_speak('Done for you!')
 
-    # 9: google
-    if there_exists(["open google"]):
-            webbrowser.open("google.com")
-            lucy_speak("Here is google for you!")
-
-    # 10: youtube
+    # 9: youtube
     if there_exists(["open youtube"]):
             webbrowser.open("www.youtube.com")
             lucy_speak("Here is youtube for you!")
 
-    # 11: github
+    # 10: github
     if there_exists(["open github"]):
             webbrowser.open("https://www.github.com")
             lucy_speak("Here is github for you!")
     
-    # 12: exiting
+    # 11: exiting
     if there_exists(["thank you","exit"]):
         lucy_speak('Goodbye')
         exit()
     
 
 time.sleep(1)
-lucy_speak('Hello, how can I help you?')
+lucy_speak('Hello!')
 user_obj = user()
 while 1:
     voice_data = record_audio() # get the voice input
