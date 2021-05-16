@@ -21,7 +21,7 @@ def if_contains(terms):
 r = sr.Recognizer() # initialise a recogniser
 # listen for audio and convert it to text:
 def record_audio(ask=False):
-    with sr.Microphone() as source: # microphone as source
+    with sr.Microphone() as source: # source is microphone
         if ask:
             lucy_speak(ask)
         audio = r.listen(source)  # listen for the audio via source
@@ -60,7 +60,7 @@ def respond(voice_data):
         else:
             lucy_speak("My name is Lucy. What's your name?")
     # 3: user name
-    if if_contains(["my name is"]):
+    if if_contains(["my name is","i am"]):
         user_name = voice_data.split("is")[-1].strip()
         lucy_speak(f"Okay, i will remember that {user_name}.")
         user_obj.setName(user_name) # remember name in user object
@@ -89,17 +89,17 @@ def respond(voice_data):
         lucy_speak('Here is the location of ' + location)
     
     # 8: open notepad
-    if if_contains(["open notepad"]):
+    if if_contains(["notepad"]):
         os.system('notepad')
         lucy_speak('Done for you!')
 
     # 9: youtube
-    if if_contains(["open youtube"]):
+    if if_contains(["youtube"]):
             webbrowser.open("www.youtube.com")
             lucy_speak("Here is youtube for you!")
 
     # 10: github
-    if if_contains(["open github"]):
+    if if_contains(["github",]):
             webbrowser.open("https://www.github.com")
             lucy_speak("Here is github for you!")
     
